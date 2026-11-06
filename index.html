@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>SF Musical Digital Twin</title>
+<style>
+  :root { --bg:#07090f; --panel:#0e1220ee; --line:#222a42; --fg:#dfe6ff; --dim:#8b96bd; --acc:#5ad1ff; }
+  * { box-sizing: border-box; }
+  html,body { margin:0; height:100%; background:var(--bg); color:var(--fg); font:13px/1.4 -apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif; overflow:hidden; }
+  #app { position:fixed; inset:0; }
+  canvas#view { width:100%; height:100%; display:block; outline:none; }
+  #panel { position:fixed; top:10px; right:10px; width:310px; max-height:calc(100% - 20px); overflow:auto; background:var(--panel); border:1px solid var(--line); border-radius:10px; backdrop-filter:blur(8px); }
+  #panel.collapsed .body { display:none; }
+  #panel header { display:flex; justify-content:space-between; align-items:center; padding:8px 12px; cursor:pointer; font-weight:600; letter-spacing:.04em; }
+  #panel details { border-top:1px solid var(--line); padding:6px 12px; }
+  #panel summary { cursor:pointer; color:var(--acc); font-weight:600; padding:4px 0; }
+  .row { display:flex; align-items:center; gap:8px; margin:5px 0; }
+  .row label { flex:0 0 108px; color:var(--dim); }
+  .row input[type=range] { flex:1; accent-color:var(--acc); }
+  .row output { flex:0 0 38px; text-align:right; color:var(--dim); font-variant-numeric:tabular-nums; }
+  button, select, input[type=file]::file-selector-button { background:#182038; color:var(--fg); border:1px solid var(--line); border-radius:6px; padding:5px 9px; font:inherit; cursor:pointer; }
+  button:hover, button:focus-visible, select:focus-visible { border-color:var(--acc); outline:none; }
+  button[aria-pressed=true] { background:#1d3a52; border-color:var(--acc); }
+  button:disabled { opacity:.45; cursor:not-allowed; }
+  #stats { position:fixed; left:10px; top:10px; font:11px ui-monospace,Menlo,monospace; background:#0008; padding:6px 8px; border-radius:6px; white-space:pre; pointer-events:none; }
+  #status { position:fixed; left:10px; bottom:10px; max-width:60%; padding:6px 10px; border-radius:6px; background:#0009; }
+  #status.err { color:#ff8d8d; }
+  #spectrum { width:100%; height:54px; display:block; background:#0a0e1a; border-radius:6px; }
+  .hint { color:var(--dim); font-size:11.5px; }
+</style>
+</head>
+<body>
+<div id="app"><canvas id="view" tabindex="0" aria-label="3D city viewport"></canvas></div>
+<pre id="stats" aria-live="off"></pre>
+<div id="status" role="status" aria-live="polite">Loading…</div>
+<aside id="panel" aria-label="Controls"></aside>
+<script type="module" src="/src/main.ts"></script>
+</body>
+</html>
